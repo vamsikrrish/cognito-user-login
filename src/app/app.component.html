@@ -4,7 +4,44 @@
         <div>
             <amplify-sign-out></amplify-sign-out>
             <div *ngIf="user">Hello, {{user.username}}</div>
-            
+            <div class="button-area">
+                <span class="option-button">
+                    <dx-button 
+                        icon="add"
+                        type="success"
+                        (onClick)="openCreateForm()">
+                    </dx-button>
+                </span>
+
+                <span class="option-button">
+                    <dx-button 
+                        icon="edit"
+                        type="normal"
+                        (onClick)="processUpdateRow()">
+                    </dx-button>
+                </span>
+
+                <span class="option-button">
+                    <dx-button 
+                        icon="trash"
+                        type="error"
+                        (onClick)="deleteSelectedRow()">
+                    </dx-button>
+                </span>
+
+                </div>
+
+                <dx-data-grid
+                    #listComponent
+                    id="listComp"
+                    [dataSource]="userList" 
+                >
+                    <dxo-selection mode="single"></dxo-selection>
+                    <dxi-column dataField="Username" caption="Username"></dxi-column>
+                    <dxi-column dataField="UserStatus" caption="User Status" ></dxi-column>
+                    <dxi-column dataField="UserCreateDate" caption="Created Date" dataType="datetime"></dxi-column>
+                    <dxi-column dataField="UserLastModifiedDate" caption="Modified Date" dataType="datetime"></dxi-column>
+                </dx-data-grid>
         </div>
     </amplify-authenticator>
 </amplify-auth-container>

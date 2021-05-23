@@ -6,17 +6,23 @@ import { AppComponent } from './app.component';
 import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 import Amplify from 'aws-amplify';
 import awsconfig from '../../src/aws-exports';
+import { HttpClientModule } from '@angular/common/http';
+import { DevExtremeModule, DxButtonModule, DxDataGridModule } from 'devextreme-angular';
 
 Amplify.configure(awsconfig);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
     ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AmplifyUIAngularModule
+    HttpClientModule,
+    AmplifyUIAngularModule,
+    DevExtremeModule,
+    DxDataGridModule,
+    DxButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
