@@ -62,4 +62,15 @@ export class AppComponent {
     });
 
   }
+
+  onToolbarPreparing(e) {
+    e.toolbarOptions.items.unshift({
+        location: 'after',
+        template: 'addButtonTemplate'
+    },{
+      location: 'after',
+      template: 'refreshButtonTemplate'
+  });
+}
+
 }

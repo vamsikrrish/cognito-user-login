@@ -4,36 +4,40 @@
         <div>
             <amplify-sign-out></amplify-sign-out>
             <div *ngIf="user">Hello, {{user.username}}</div>
-            <div class="button-area">
-                <span class="option-button">
-                    <dx-button 
-                        icon="add"
-                        type="success"
-                        (onClick)="showAddPopUp=true">
-                    </dx-button>
-                </span>
-
-                <span class="option-button">
-                    <dx-button 
-                        icon="refresh"
-                        type="normal"
-                        (onClick)="refresh()">
-                    </dx-button>
-                </span>
-
-
-                </div>
-
                 <dx-data-grid
                     #listComponent
                     id="listComp"
+                    height="75vh"
                     [dataSource]="userList" 
+                    [rowAlternationEnabled]="true"
+                    [showBorders]="true"
+                    (onToolbarPreparing) ="onToolbarPreparing($event)"
                 >
+                    <dxo-search-panel
+                        [visible]="true"
+                    ></dxo-search-panel>
                     <dxo-selection mode="single"></dxo-selection>
                     <dxi-column dataField="Username" caption="Username"></dxi-column>
                     <dxi-column dataField="UserStatus" caption="User Status" ></dxi-column>
                     <dxi-column dataField="UserCreateDate" caption="Created Date" dataType="datetime"></dxi-column>
                     <dxi-column dataField="UserLastModifiedDate" caption="Modified Date" dataType="datetime"></dxi-column>
+
+                    <div *dxTemplate="let data of 'addButtonTemplate'">
+                        <dx-button 
+                            icon="add"
+                            type="success"
+                            (onClick)="showAddPopUp=true">
+                        </dx-button>
+                    </div>
+
+                    <div *dxTemplate="let data of 'refreshButtonTemplate'">
+                        <dx-button 
+                            icon="refresh"
+                            type="normal"
+                            (onClick)="refresh()">
+                        </dx-button>
+                    </div>
+
                 </dx-data-grid>
         </div>
 
