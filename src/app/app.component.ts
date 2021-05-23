@@ -23,10 +23,14 @@ export class AppComponent {
     onAuthUIStateChange((authState, authData) => {
       this.authState = authState;
       this.user = authData as CognitoUserInterface;
-      if(this.user){
+      this.userService.initToken();
+      this.ref.detectChanges();
+    });
+
+    this.userService.jwtTokenSubject.subscribe((authenticated)=>{
+      if(authenticated){
         this.fetchUsers();
       }
-      this.ref.detectChanges();
     })
   }
 

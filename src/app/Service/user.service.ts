@@ -1,17 +1,35 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Auth} from 'aws-amplify';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  jwtToken;
+  jwtTokenSubject:BehaviorSubject<boolean>=new BehaviorSubject<boolean>(false);
   constructor(
     private http:HttpClient
-  ) { }
+  ) { 
+     
+  }
+
+ initToken(){
+    Auth.currentSession().then(res=>{
+      let accessToken = res.getAccessToken();
+      this.jwtToken = accessToken.getJwtToken();
+      this.jwtTokenSubject.next(true);
+    });
+  }
 
   getAllUsers():Observable<any>{
-   return this.http.get("https://nn9hebqox8.execute-api.us-east-1.amazonaws.com/Test");
+    
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization',  'Bearer ' + this.jwtToken)
+    }
+    
+   return this.http.get("https://nn9hebqox8.execute-api.us-east-1.amazonaws.com/Test",header);
   }
 
   adduser(userDetail:any){
