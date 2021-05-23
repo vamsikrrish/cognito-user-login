@@ -12,8 +12,12 @@ export class AppComponent {
   user: CognitoUserInterface | undefined;
   authState: AuthState;
   userList =[];
-
-  constructor(private ref: ChangeDetectorRef,private authService:UserService) {}
+  showAddPopUp:boolean =false;
+  userDetail={};
+  isToastVisible:boolean =false;
+  type:string ='error';
+  message:string='';
+  constructor(private ref: ChangeDetectorRef,private userService:UserService) {}
 
   ngOnInit() {
     onAuthUIStateChange((authState, authData) => {
@@ -29,10 +33,15 @@ export class AppComponent {
   ngOnDestroy() {
     return onAuthUIStateChange;
   }
+
+  refresh(){
+    this.fetchUsers();
+  }
   
 
   fetchUsers(){
-    this.authService.getAllUsers().subscribe(
+    this.userList=[];
+    this.userService.getAllUsers().subscribe(
       (response)=>{
         this.userList = response.data.Users;
         this.ref.detectChanges();
@@ -40,5 +49,17 @@ export class AppComponent {
      },(err)=>{
        console.log(err);
      });
+  }
+
+  addUser(){
+    this.userService.adduser(this.userDetail).then((response:any)=>{
+        this.showAddPopUp=false;
+        console.log(response);
+    },(err)=>{
+      this.message=err.message;
+      this.isToastVisible= true;
+      console.log(this.isToastVisible,this.message,this.type);
+    });
+
   }
 }

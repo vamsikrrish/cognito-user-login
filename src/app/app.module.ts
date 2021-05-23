@@ -7,7 +7,8 @@ import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 import Amplify from 'aws-amplify';
 import awsconfig from '../../src/aws-exports';
 import { HttpClientModule } from '@angular/common/http';
-import { DevExtremeModule, DxButtonModule, DxDataGridModule } from 'devextreme-angular';
+import { DevExtremeModule, DxButtonModule, DxDataGridModule, DxPopupModule, DxScrollViewModule, DxToastModule } from 'devextreme-angular';
+import { DxiItemModule } from 'devextreme-angular/ui/nested';
 
 Amplify.configure(awsconfig);
 
@@ -22,6 +23,9 @@ Amplify.configure(awsconfig);
     AmplifyUIAngularModule,
     DevExtremeModule,
     DxDataGridModule,
+    DxPopupModule,
+    DxScrollViewModule,
+    DxiItemModule,
     DxButtonModule
   ],
   providers: [],
