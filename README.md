@@ -4,9 +4,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Project Setup
 
-Download and install `Node.js (LTS)`.
-Install Angular 7 -> `npm i -g @angular/cli@7`
-Install dependancies -> `npm i`
+1. Download and install `Node.js (LTS)`.
+2. Install Angular 7 -> `npm i -g @angular/cli@7`
+3. Install dependancies -> `npm i`
 
 ## Development server
 
