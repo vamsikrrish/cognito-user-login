@@ -1,5 +1,6 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { onAuthUIStateChange, CognitoUserInterface, AuthState } from '@aws-amplify/ui-components';
+import { AuthService } from './Service/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ export class AppComponent {
   user: CognitoUserInterface | undefined;
   authState: AuthState;
 
-  constructor(private ref: ChangeDetectorRef) {}
+  constructor(private ref: ChangeDetectorRef,private authService:AuthService) {}
 
   ngOnInit() {
     onAuthUIStateChange((authState, authData) => {
@@ -19,9 +20,14 @@ export class AppComponent {
       this.user = authData as CognitoUserInterface;
       this.ref.detectChanges();
     })
+    this.fetchUsers();
   }
 
   ngOnDestroy() {
     return onAuthUIStateChange;
+  }
+
+  fetchUsers(){
+    this.authService.getAllusers();
   }
 }
