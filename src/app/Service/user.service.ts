@@ -16,8 +16,8 @@ export class UserService {
 
  initToken(){
     Auth.currentSession().then(res=>{
-      let accessToken = res.getAccessToken();
-      this.jwtToken = accessToken.getJwtToken();
+      let idToken = res.getIdToken();
+      this.jwtToken = idToken.getJwtToken();
       this.jwtTokenSubject.next(true);
     });
   }
