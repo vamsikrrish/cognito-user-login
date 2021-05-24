@@ -38,6 +38,7 @@ export class UserService {
       password: userDetail.password,
       attributes: {
         email: userDetail.email,
+        phone_number: userDetail.phone,
       }
     };
     return Auth.signUp(user);

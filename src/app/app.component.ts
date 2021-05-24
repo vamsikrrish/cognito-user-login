@@ -29,18 +29,23 @@ export class AppComponent {
      this.formFields = [
       {
         type: "username",
-        label: "Username",
+        label: "Username *",
         inputProps: { required: true, autocomplete: "username" },
       },
       {
         type: "password",
-        label: "Password",
+        label: "Password *",
         inputProps: { required: true, autocomplete: "new-password" },
       },
       {
         type: "email",
-        label: "E-mail",
+        label: "E-mail *",
         inputProps: { required: true, autocomplete: "email" },
+      },      {
+        type: "phone_number",
+        label: "Phone",
+        inputProps: { required: false,},
+        value:"91"
       }
     ];
 
