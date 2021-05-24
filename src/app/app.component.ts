@@ -1,5 +1,6 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
-import { onAuthUIStateChange, CognitoUserInterface, AuthState } from '@aws-amplify/ui-components';
+import { Component, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { onAuthUIStateChange, CognitoUserInterface, AuthState, FormFieldTypes } from '@aws-amplify/ui-components';
+import { DxFormComponent } from 'devextreme-angular';
 import { UserService } from './Service/user.service';
 
 @Component({
@@ -17,7 +18,33 @@ export class AppComponent {
   isToastVisible:boolean =false;
   type:string ='error';
   message:string='';
-  constructor(private ref: ChangeDetectorRef,private userService:UserService) {}
+  formFields: FormFieldTypes;
+  submitButtonOptions: any = {
+    text: "Register",
+    type: "success",
+    useSubmitBehavior: true,
+    onClick:"addUser"
+}
+  constructor(private ref: ChangeDetectorRef,private userService:UserService) {
+     this.formFields = [
+      {
+        type: "username",
+        label: "Username",
+        inputProps: { required: true, autocomplete: "username" },
+      },
+      {
+        type: "password",
+        label: "Password",
+        inputProps: { required: true, autocomplete: "new-password" },
+      },
+      {
+        type: "email",
+        label: "E-mail",
+        inputProps: { required: true, autocomplete: "email" },
+      }
+    ];
+
+  }
 
   ngOnInit() {
     onAuthUIStateChange((authState, authData) => {
@@ -55,7 +82,7 @@ export class AppComponent {
      });
   }
 
-  addUser(){
+  addUser(e){
     this.userService.adduser(this.userDetail).then((response:any)=>{
         this.showAddPopUp=false;
         console.log(response);

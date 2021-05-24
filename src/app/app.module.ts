@@ -9,6 +9,7 @@ import awsconfig from '../../src/aws-exports';
 import { HttpClientModule } from '@angular/common/http';
 import { DevExtremeModule, DxButtonModule, DxDataGridModule, DxPopupModule, DxScrollViewModule, DxToastModule } from 'devextreme-angular';
 import { DxiItemModule } from 'devextreme-angular/ui/nested';
+import { FormsModule } from '@angular/forms';
 
 Amplify.configure(awsconfig);
 
@@ -18,6 +19,7 @@ Amplify.configure(awsconfig);
     ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
     AmplifyUIAngularModule,

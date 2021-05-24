@@ -1,6 +1,11 @@
 <amplify-auth-container>
 
     <amplify-authenticator >
+        <amplify-sign-up
+            slot="sign-up"
+            usernameAlias="username"
+            [formFields]="formFields"
+        ></amplify-sign-up>
         <div>
             <amplify-sign-out></amplify-sign-out>
             <div *ngIf="user">Hello, {{user.username}}</div>
@@ -49,8 +54,10 @@
             [title]="'Add User'">
         <div *dxTemplate="let data of 'content'">
             <dx-scroll-view>
+                <form action="your-action" (submit)="addUser($event)"> 
                 <dx-form id="createForm"
-                    [formData]="userDetail">
+                    [formData]="userDetail"
+                    >
                         <dxi-item itemType="group" [colSpan]="3">
                             <dxi-item dataField="username">
                                 <dxi-validation-rule 
@@ -64,19 +71,22 @@
                                     message="Password is required">
                                 </dxi-validation-rule>
                             </dxi-item>
-                            <dxi-item dataField="email"></dxi-item>
-                            <dxi-item dataField="phone"></dxi-item>
+                            <dxi-item dataField="email">
+                                <dxi-validation-rule 
+                                    type="required"
+                                    message="E-mail is required">
+                                </dxi-validation-rule>
+                            </dxi-item>
+                        </dxi-item>                        
+                        <dxi-item 
+                            itemType="button"
+                            horizontalAlignment="left"
+                            [buttonOptions]="submitButtonOptions">
                         </dxi-item>
                     
                     </dx-form>
-                    <br/>
+                    </form>
                     <p *ngIf="isToastVisible" style="font-size: medium;color: red;">{{message}}</p>
-                    <dx-button style="float: right;"
-                        [text]="'Add user'"
-                        type="success"
-                        [width]="120"
-                        (onClick)="addUser()">
-                    </dx-button>
 
             </dx-scroll-view>
         </div>
