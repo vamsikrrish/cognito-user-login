@@ -29,7 +29,7 @@ export class UserService {
         .set('Authorization',  'Bearer ' + this.jwtToken)
     }
     
-   return this.http.get("https://nn9hebqox8.execute-api.us-east-1.amazonaws.com/Test",header);
+   return this.http.get("https://cyul97ww14.execute-api.us-east-1.amazonaws.com/v1/users",header);
   }
 
   adduser(userDetail:any){

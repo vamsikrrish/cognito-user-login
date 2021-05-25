@@ -79,7 +79,7 @@ export class AppComponent {
     this.userList=[];
     this.userService.getAllUsers().subscribe(
       (response)=>{
-        this.userList = response.data.Users;
+        this.userList = response.Users;
         this.ref.detectChanges();
         console.log(this.userList);
      },(err)=>{
